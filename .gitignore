@@ -1,0 +1,16 @@
+# .NET build outputs
+**/bin/
+**/obj/
+**/publish/
+
+# Visual Studio user files
+.vs/
+*.user
+*.suo
+
+# Local Codex configuration
+.codex/
+.agents/
+
+# Published executables and real serial logs
+outputs/
