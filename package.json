@@ -1,0 +1,8 @@
+{
+  "name": "serial-log-formatter-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test work/SerialLogFormatter.Web.Tests/formatter.test.mjs"
+  }
+}

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>串口日志整理工具</title>
+    <meta name="description" content="粘贴串口抓到的 MCU/DSP HEX 日志，按帧头自动分帧和换行。数据只在浏览器本地处理。">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232563eb'/%3E%3Cpath d='M8 11h16M8 16h10M8 21h13' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="app.js"></script>
+</head>
+<body>
+<main class="app">
+    <header>
+        <h1>串口日志整理工具 <span class="version" id="version"></span></h1>
+        <p class="subtitle">粘贴原始日志，按帧头自动分帧、换行和规范化 HEX。数据只在浏览器本地处理，不会上传。</p>
+    </header>
+
+    <section class="settings" aria-label="设置">
+        <label>帧头
+            <input id="header" type="text" value="84 A9 61" spellcheck="false" autocomplete="off">
+        </label>
+        <label>每行字节数（0=整帧一行）
+            <input id="bytesPerLine" type="number" min="0" max="256" value="0">
+        </label>
+        <label class="check"><input id="preserveTimestamps" type="checkbox" checked> 保留时间戳（单独一行）</label>
+        <label class="check"><input id="showInfo" type="checkbox" checked> 显示序号和长度</label>
+        <label class="check"><input id="uppercase" type="checkbox" checked> 大写 HEX</label>
+    </section>
+
+    <section class="actions">
+        <button id="format" class="primary" type="button" title="Ctrl+Enter">整理格式</button>
+        <button id="paste" class="accent" type="button">粘贴并整理</button>
+        <button id="open" type="button">打开文件</button>
+        <button id="copy" type="button">复制结果</button>
+        <button id="download" type="button">下载结果</button>
+        <button id="clear" type="button">清空</button>
+        <input id="file" type="file" accept=".txt,.log,.csv,text/*" hidden>
+    </section>
+
+    <section class="editors">
+        <div class="pane">
+            <label for="input">原始日志 <span class="hint">可拖入 .txt / .log 文件</span></label>
+            <textarea id="input" spellcheck="false" wrap="off">示例：
+[10:21:35.126] TX: 84 A9 61 01 02 03 04 84 A9 61 81 00 FF</textarea>
+        </div>
+        <div class="pane">
+            <label for="output">整理结果</label>
+            <textarea id="output" spellcheck="false" wrap="off" readonly></textarea>
+        </div>
+    </section>
+
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+</main>
+</body>
+</html>
